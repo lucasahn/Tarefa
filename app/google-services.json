@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "627012276818",
+    "firebase_url": "https://fistproject-fc6ab.firebaseio.com",
+    "project_id": "fistproject-fc6ab",
+    "storage_bucket": "fistproject-fc6ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627012276818:android:3061ea704fd7b191",
+        "android_client_info": {
+          "package_name": "com.example.aluno.tarefa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627012276818-qgh46dpnk82ts8veckit3fmo77hho0al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClCMtyvmmY80FcuYmbug5PwSiD1iu-edM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

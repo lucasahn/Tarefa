@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgCliente"
+        android:layout_width="146dp"
+        android:layout_height="146dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginRight="156dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/tvNomeCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Nome"
+        app:layout_constraintBottom_toTopOf="@+id/imgCliente"
+        tools:layout_editor_absoluteX="163dp" />
+
+    <TextView
+        android:id="@+id/tvCpfCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123456789"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="245dp" />
+
+    <TextView
+        android:id="@+id/tvDataInscrição"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01/01/1111"
+        tools:layout_editor_absoluteX="265dp"
+        tools:layout_editor_absoluteY="245dp" />
+</android.support.constraint.ConstraintLayout>
