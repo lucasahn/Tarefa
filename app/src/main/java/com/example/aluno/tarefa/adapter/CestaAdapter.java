@@ -39,7 +39,7 @@ public class CestaAdapter extends ArrayAdapter<ItemPedido>{
         TextView total = (TextView) convertView.findViewById(R.id.tvTotalProdutoCestaAdapter);
 
         nome.setText(item.getProduto().getNome());
-        qtd.setText(item.getProduto().getQuantidade());
+        qtd.setText(item.getProduto().getQuantidade().toString());
         total.setText(item.getTotal().toString());
 
         return convertView;

@@ -1,15 +1,34 @@
 package com.example.aluno.tarefa.model;
 
-public class ItemPedido {
-    Produto produto;
-    Double total;
+import java.io.Serializable;
 
-    public ItemPedido() {
+public class ItemPedido implements Serializable {
+   private Produto produto;
+   private Double total;
+   private Cliente cliente;
+
+    public ItemPedido(Produto produto, Double total, Cliente cliente) {
+        this.produto = produto;
+        this.total = total;
+        this.cliente = cliente;
     }
 
     public ItemPedido(Produto produto, Double total) {
         this.produto = produto;
         this.total = total;
+        this.cliente = cliente;
+    }
+
+    public ItemPedido() {
+
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Produto getProduto() {

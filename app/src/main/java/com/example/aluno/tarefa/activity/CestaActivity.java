@@ -1,7 +1,10 @@
 package com.example.aluno.tarefa.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.aluno.tarefa.R;
@@ -22,5 +25,15 @@ public class CestaActivity extends AppCompatActivity {
         ListView lvCesta = findViewById(R.id.lvCesta);
 
         lvCesta.setAdapter(new CestaAdapter(CestaActivity.this, AppSetup.itens));
+
+        Button bt = findViewById(R.id.btVoltar);
+
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CestaActivity.this, ProdutosActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

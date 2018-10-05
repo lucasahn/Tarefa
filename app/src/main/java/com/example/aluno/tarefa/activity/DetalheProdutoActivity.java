@@ -29,7 +29,6 @@ public class DetalheProdutoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalheproduto);
-        AppSetup.itens = new ArrayList<ItemPedido>();
     }
 
     @Override
@@ -71,9 +70,8 @@ public class DetalheProdutoActivity extends AppCompatActivity {
                         if (!etQuantidade.getText().toString().matches("") && Integer.valueOf (etQuantidade.getText().toString()) <= produto.getEstoque()) {
                             produto.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
                             ItemPedido item = new ItemPedido(produto, produto.getValor() * produto.getQuantidade());
-                            AppSetup.itens.add(item);
                             Intent intent = new Intent(DetalheProdutoActivity.this, ClientesActivity.class);
-                            //intent.putExtra("produto", produto);
+                            intent.putExtra("item", item);
                             startActivity(intent);
                         }else{
                             Toast.makeText(DetalheProdutoActivity.this, "Estoque não possui itens suficientes ou o campo está vazio!", Toast.LENGTH_SHORT).show();

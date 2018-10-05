@@ -9,11 +9,14 @@ import android.widget.Toast;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.model.Cliente;
 import com.example.aluno.tarefa.model.Compra;
+import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.model.Produto;
+import com.example.aluno.tarefa.setup.AppSetup;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,6 +39,7 @@ public class CompraActivity extends AppCompatActivity {
         Compra compra = new Compra(cliente.getCodigo(), produto.getId(), produto.getQuantidade(), data);
 
         ref.child("compra").push().setValue(compra);
+        AppSetup.itens = new ArrayList<ItemPedido>();
 
         new Handler().postDelayed(new Runnable() {
             @Override

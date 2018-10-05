@@ -12,7 +12,9 @@ import android.widget.Toast;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.adapter.ClientesAdapter;
 import com.example.aluno.tarefa.model.Cliente;
+import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.model.Produto;
+import com.example.aluno.tarefa.setup.AppSetup;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,8 +62,11 @@ public class ClientesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object objeto = lvClientes.getItemAtPosition(position);
                 Cliente cliente3 = (Cliente) objeto;
-                Intent i = new Intent(ClientesActivity.this, CestaActivity.class);
-                i.putExtra("cliente", cliente3);
+                Intent i = getIntent();
+                ItemPedido item = (ItemPedido) i.getSerializableExtra("item");
+                item.setCliente(cliente3);
+                AppSetup.itens.add(item);
+                Intent i2 = new Intent(ClientesActivity.this, CestaActivity.class);
                 startActivity(i);
             }
         });
