@@ -9,7 +9,10 @@ import android.widget.ListView;
 
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.adapter.CestaAdapter;
+import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.setup.AppSetup;
+
+import java.util.ArrayList;
 
 public class CestaActivity extends AppCompatActivity {
 
@@ -27,12 +30,21 @@ public class CestaActivity extends AppCompatActivity {
         lvCesta.setAdapter(new CestaAdapter(CestaActivity.this, AppSetup.itens));
 
         Button bt = findViewById(R.id.btVoltar);
+        Button bt2 = findViewById(R.id.btLimpar);
 
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CestaActivity.this, ProdutosActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppSetup.itens = new ArrayList<ItemPedido>();
+                startActivity(getIntent());
             }
         });
     }

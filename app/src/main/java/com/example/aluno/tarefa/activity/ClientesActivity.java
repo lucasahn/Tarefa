@@ -67,7 +67,7 @@ public class ClientesActivity extends AppCompatActivity {
                 item.setCliente(cliente3);
                 AppSetup.itens.add(item);
                 Intent i2 = new Intent(ClientesActivity.this, CestaActivity.class);
-                startActivity(i);
+                startActivity(i2);
             }
         });
     }
