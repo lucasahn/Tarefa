@@ -3,7 +3,15 @@ package com.example.aluno.tarefa.model;
 import java.io.Serializable;
 
 public class Produto implements Serializable {
-    private Long id;
+    public Long getCodigoDeBarras() {
+        return codigoDeBarras;
+    }
+
+    public void setCodigoDeBarras(Long codigoDeBarras) {
+        this.codigoDeBarras = codigoDeBarras;
+    }
+
+    private Long codigoDeBarras;
     private String nome;
     private Double valor;
     private String descricao;
@@ -11,12 +19,6 @@ public class Produto implements Serializable {
     private Integer estoque;
     private Integer quantidade = null;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getNome() {
         return nome;
     }
@@ -59,8 +61,8 @@ public class Produto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Produto(Long id, String nome, Double valor, String descricao, boolean situacao, Integer quantidade, Integer estoque) {
-        this.id = id;
+    public Produto(Long codigoDeBarras, String nome, Double valor, String descricao, boolean situacao, Integer quantidade, Integer estoque) {
+        this.codigoDeBarras = codigoDeBarras;
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
@@ -75,7 +77,7 @@ public class Produto implements Serializable {
     @Override
     public String toString() {
         return "Produto{" +
-                "id=" + id +
+                "id=" + codigoDeBarras +
                 ", nome='" + nome + '\'' +
                 ", valor=" + valor +
                 ", descricao='" + descricao + '\'' +

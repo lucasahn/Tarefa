@@ -48,7 +48,7 @@ public class DetalheProdutoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 produto = dataSnapshot.getValue(Produto.class);
 
-                produto.setId(id);
+                produto.setCodigoDeBarras(id);
 
                 TextView tvNome = findViewById(R.id.tvNomeProduto);
                 tvNome.setText(produto.getNome());

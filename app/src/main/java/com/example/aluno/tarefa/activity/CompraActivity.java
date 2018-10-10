@@ -30,13 +30,13 @@ public class CompraActivity extends AppCompatActivity {
         Cliente cliente = (Cliente) getIntent().getSerializableExtra("cliente");
         produto.setEstoque(produto.getEstoque() - produto.getQuantidade());
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("produto").child(produto.getId().toString()).child("estoque").setValue(produto.getEstoque());
+        ref.child("produto").child(produto.getCodigoDeBarras().toString()).child("estoque").setValue(produto.getEstoque());
 
         Date hoje = Calendar.getInstance().getTime();
         SimpleDateFormat dataformato = new SimpleDateFormat("dd-MM-yyyy");
         String data = dataformato.format(hoje);
 
-        Compra compra = new Compra(cliente.getCodigo(), produto.getId(), produto.getQuantidade(), data);
+        Compra compra = new Compra(cliente.getCodigo(), produto.getCodigoDeBarras(), produto.getQuantidade(), data);
 
         ref.child("compra").push().setValue(compra);
         AppSetup.itens = new ArrayList<ItemPedido>();
