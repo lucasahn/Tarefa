@@ -36,54 +36,58 @@ public class DetalheProdutoActivity extends AppCompatActivity {
         super.onStart();
         DatabaseReference ref;
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        final Long id = (bundle.getLong("id"));
 
         ref = FirebaseDatabase.getInstance().getReference();
 
 
-        ref.child("produto").child(id.toString()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                produto = dataSnapshot.getValue(Produto.class);
+       // ref.child("produto").child(AppSetup.produto.getCodigoDeBarras().toString()).addValueEventListener(new ValueEventListener() {
+          //  @Override
+           // public void onDataChange(DataSnapshot dataSnapshot) {
+              //  produto = dataSnapshot.getValue(Produto.class);
 
-                produto.setCodigoDeBarras(id);
+                //produto.setCodigoDeBarras(id);
 
                 TextView tvNome = findViewById(R.id.tvNomeProduto);
-                tvNome.setText(produto.getNome());
+                tvNome.setText(AppSetup.produto.getNome());
 
                 TextView tvDescricao = findViewById(R.id.tvDescricaoProduto);
-                tvDescricao.setText(produto.getDescricao());
+                tvDescricao.setText(AppSetup.produto.getDescricao());
 
                 TextView tvValor = findViewById(R.id.tvValorProduto);
-                tvValor.setText(produto.getValor().toString());
+                tvValor.setText(AppSetup.produto.getValor().toString());
 
                 TextView tvEstoque = findViewById(R.id.tvQuantidadeProduto);
-                tvEstoque.setText(produto.getEstoque().toString());
+                tvEstoque.setText(AppSetup.produto.getEstoque().toString());
 
                 Button btComprar = findViewById(R.id.btnComprar);
                 btComprar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditText etQuantidade = findViewById(R.id.etQuantidadeProduto);
-                        if (!etQuantidade.getText().toString().matches("") && Integer.valueOf (etQuantidade.getText().toString()) <= produto.getEstoque()) {
-                            produto.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
-                            ItemPedido item = new ItemPedido(produto, produto.getValor() * produto.getQuantidade());
-                            Intent intent = new Intent(DetalheProdutoActivity.this, ClientesActivity.class);
-                            intent.putExtra("item", item);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(DetalheProdutoActivity.this, "Estoque não possui itens suficientes ou o campo está vazio!", Toast.LENGTH_SHORT).show();
+                        if (AppSetup.cliente == null) {
+                            startActivity(new Intent(DetalheProdutoActivity.this, ClientesActivity.class));
+                            finish();
+                        }
+                        else{
+                                EditText etQuantidade = findViewById(R.id.etQuantidadeProduto);
+                                if (!etQuantidade.getText().toString().matches("") && Integer.valueOf(etQuantidade.getText().toString()) <= AppSetup.produto.getEstoque()) {
+                                    AppSetup.produto.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
+                                    ItemPedido item = new ItemPedido(AppSetup.produto, AppSetup.produto.getValor() * AppSetup.produto.getQuantidade());
+                                    Intent intent = new Intent(DetalheProdutoActivity.this, CestaActivity.class);
+                                    AppSetup.itens.add(item);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(DetalheProdutoActivity.this, "Estoque não possui itens suficientes ou o campo está vazio!", Toast.LENGTH_SHORT).show();
+                                }
                         }
                     }
                 });
-            }
+           // }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+           // @Override
+           // public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+          //  }
+        //});
     }
 }

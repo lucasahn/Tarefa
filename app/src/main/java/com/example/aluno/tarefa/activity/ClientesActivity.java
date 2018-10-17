@@ -34,41 +34,45 @@ public class ClientesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clientes);
-        final ListView lvClientes = findViewById(R.id.lvClientes);
-        fbDataBase = FirebaseDatabase.getInstance();
-        dtRef = fbDataBase.getReference();
-        dtRef.child("cliente").orderByChild("nome")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
-                            Cliente cliente2 = dataSnap.getValue(Cliente.class);
-                            //Toast.makeText(ClientesActivity.this, cliente2.toString(), Toast.LENGTH_SHORT).show();
-                            cliente2.setCodigo(Long.parseLong(dataSnap.getKey()));
-                            clientes.add(cliente2);
+        if (AppSetup.cliente != null) {
+            startActivity(new Intent(ClientesActivity.this, DetalheProdutoActivity.class));
+        } else {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_clientes);
+            final ListView lvClientes = findViewById(R.id.lvClientes);
+            fbDataBase = FirebaseDatabase.getInstance();
+            dtRef = fbDataBase.getReference();
+            dtRef.child("cliente").orderByChild("nome")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
+                                Cliente cliente2 = dataSnap.getValue(Cliente.class);
+                                //Toast.makeText(ClientesActivity.this, cliente2.toString(), Toast.LENGTH_SHORT).show();
+                                cliente2.setCodigo(Long.parseLong(dataSnap.getKey()));
+                                clientes.add(cliente2);
+                            }
+                            lvClientes.setAdapter(new ClientesAdapter(ClientesActivity.this, clientes));
                         }
-                        lvClientes.setAdapter(new ClientesAdapter(ClientesActivity.this, clientes));
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-        lvClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object objeto = lvClientes.getItemAtPosition(position);
-                Cliente cliente3 = (Cliente) objeto;
-                Intent i = getIntent();
-                ItemPedido item = (ItemPedido) i.getSerializableExtra("item");
-                item.setCliente(cliente3);
-                AppSetup.itens.add(item);
-                Intent i2 = new Intent(ClientesActivity.this, CestaActivity.class);
-                startActivity(i2);
-            }
-        });
+                        }
+                    });
+
+            lvClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Object objeto = lvClientes.getItemAtPosition(position);
+                    Cliente cliente3 = (Cliente) objeto;
+                    AppSetup.cliente = new Cliente();
+                    AppSetup.cliente = cliente3;
+                    Intent i2 = new Intent(ClientesActivity.this, DetalheProdutoActivity.class);
+                    startActivity(i2);
+                    finish();
+                }
+            });
+        }
     }
 }

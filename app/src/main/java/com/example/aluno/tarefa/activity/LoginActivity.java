@@ -80,5 +80,6 @@ final EditText senha = findViewById(R.id.etSenhaLogin);
 
     private void carregarProdutos(){
         startActivity(new Intent(LoginActivity.this, ProdutosActivity.class));
+        finish();
     }
 }
