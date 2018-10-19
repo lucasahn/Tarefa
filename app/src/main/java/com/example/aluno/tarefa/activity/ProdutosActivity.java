@@ -82,7 +82,6 @@ public class ProdutosActivity extends AppCompatActivity {
                 AppSetup.produto = produto3;
                 Intent i = new Intent(ProdutosActivity.this, DetalheProdutoActivity.class);
                 startActivity(i);
-                finish();
             }
         });
     }

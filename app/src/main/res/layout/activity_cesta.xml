@@ -6,34 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".activity.CestaActivity">
 
+
+    <TextView
+        android:id="@+id/tvCestaCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="15dp"
+        android:text="cliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCestaValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="94dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="22dp"
+        android:text="Valor"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tvCestaCliente"
+        app:layout_constraintTop_toBottomOf="@+id/tvCestaCliente" />
+
     <ListView
         android:id="@+id/lvCesta"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ListView>
+        app:layout_constraintTop_toBottomOf="@+id/tvCestaValor">
 
-    <Button
-        android:id="@+id/btVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="384dp"
-        android:text="Voltar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lvCesta" />
+    </ListView>
 
-    <Button
-        android:id="@+id/btLimpar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="224dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="384dp"
-        android:text="Limpar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lvCesta" />
+
 </android.support.constraint.ConstraintLayout>
