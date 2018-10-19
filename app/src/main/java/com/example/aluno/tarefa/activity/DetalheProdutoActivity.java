@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DetalheProdutoActivity extends AppCompatActivity {
@@ -54,7 +55,7 @@ public class DetalheProdutoActivity extends AppCompatActivity {
                 tvDescricao.setText(AppSetup.produto.getDescricao());
 
                 TextView tvValor = findViewById(R.id.tvValorProduto);
-                tvValor.setText(AppSetup.produto.getValor().toString());
+                tvValor.setText(NumberFormat.getCurrencyInstance().format(AppSetup.produto.getValor()));
 
                 TextView tvEstoque = findViewById(R.id.tvQuantidadeProduto);
                 tvEstoque.setText(AppSetup.produto.getEstoque().toString());

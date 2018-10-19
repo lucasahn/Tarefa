@@ -147,7 +147,7 @@ public class ProdutosActivity extends AppCompatActivity {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    //Toast.makeText(this, barcode.displayValue, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, barcode.displayValue, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                     //localiza o produto na lista (ou não)
                     boolean flag = true;

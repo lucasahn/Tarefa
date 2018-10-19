@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.model.Produto;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ProdutosAdapter extends ArrayAdapter<Produto> {
@@ -36,7 +37,7 @@ public class ProdutosAdapter extends ArrayAdapter<Produto> {
         TextView preco = (TextView) convertView.findViewById(R.id.tvQuantidadeProdutoCestaAdapter);
 
         nome.setText(produto.getNome());
-        preco.setText(String.valueOf(produto.getValor()));
+        preco.setText(NumberFormat.getCurrencyInstance().format(produto.getValor()));
 
         return convertView;
     }

@@ -14,6 +14,7 @@ import com.example.aluno.tarefa.activity.CestaActivity;
 import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.model.Produto;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class CestaAdapter extends ArrayAdapter<ItemPedido>{
@@ -40,7 +41,7 @@ public class CestaAdapter extends ArrayAdapter<ItemPedido>{
 
         nome.setText(item.getProduto().getNome());
         qtd.setText(item.getProduto().getQuantidade().toString());
-        total.setText(item.getTotal().toString());
+        total.setText(NumberFormat.getCurrencyInstance().format(item.getTotal()));
 
         return convertView;
     }

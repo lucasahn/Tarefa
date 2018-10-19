@@ -109,7 +109,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Preço: R$"
+        android:text="Preço: "
         app:layout_constraintBottom_toTopOf="@+id/tvDescricaoProduto"
         app:layout_constraintStart_toStartOf="parent" />
 

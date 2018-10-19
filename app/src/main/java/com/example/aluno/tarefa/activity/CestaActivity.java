@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,16 +18,28 @@ import android.widget.Toast;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.adapter.CestaAdapter;
 import com.example.aluno.tarefa.model.ItemPedido;
+import com.example.aluno.tarefa.model.Pedido;
+import com.example.aluno.tarefa.model.Produto;
 import com.example.aluno.tarefa.setup.AppSetup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
+import java.lang.reflect.Array;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class CestaActivity extends AppCompatActivity {
 
    private ListView lvCesta;
    private Double totalPedido;
-   //private TextView tvCliente = findViewById(R.id.tvCestaCliente);
+   private TextView tvCliente;
    private TextView tvValor;
 
     @Override
@@ -39,8 +52,9 @@ public class CestaActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         lvCesta = findViewById(R.id.lvCesta);
-
-        lvCesta.setAdapter(new CestaAdapter(CestaActivity.this, AppSetup.itens));
+        tvCliente = findViewById(R.id.tvCestaCliente);
+        tvCliente.setText(AppSetup.cliente.getNome());
+        atualizarView();
 
         lvCesta.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -64,7 +78,7 @@ public class CestaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
          switch (item.getItemId()){
              case R.id.menuitem_salvar: {
-                alertDialogSalvarPedido("Quase lá", "\nTotal do Pedido:" + NumberFormat.getCurrencyInstance().format(10));
+                alertDialogSalvarPedido("Quase lá", "\nTotal do Pedido:" + NumberFormat.getCurrencyInstance().format(totalPedido));
                  break;
              }
              case R.id.menuitem_cancelar:{
@@ -85,11 +99,9 @@ public class CestaActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(CestaActivity.this, "Ótimo! Vendido.", Toast.LENGTH_SHORT).show();
-                /*
-                 *  persistir a o pedido no Firebase aqui!!!!!!!!!!!! Lembrar de atualizar o estoque
-                 *  e controlar as exceções.
-                 */
+
+                salvarEstoque();
+               // Toast.makeText(CestaActivity.this, "Ótimo! Vendido.", Toast.LENGTH_SHORT).show();
                 AppSetup.itens.clear();
                 AppSetup.cliente = null;
                 finish();
@@ -163,5 +175,34 @@ public class CestaActivity extends AppCompatActivity {
         }
         tvValor = findViewById(R.id.tvCestaValor);
        tvValor.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+    }
+
+    private boolean salvarEstoque() {
+        DatabaseReference estoqueRef;
+       // for (final ItemPedido item : AppSetup.itens) {
+            estoqueRef = FirebaseDatabase.getInstance().getReference("produto");
+            estoqueRef.runTransaction(new Transaction.Handler() {
+                public static final String TAG = "CestaActivity";
+
+                @Override
+                public Transaction.Result doTransaction(MutableData mutableData) {
+                    Array produtos = mutableData.getValue(Array.class);
+                   // if (estoque != null && estoque >= item.getProduto().getQuantidade()) {
+                       // mutableData.setValue(estoque - item.getProduto().getQuantidade());
+                    //}
+                    Log.d(TAG, produtos.toString());
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(DatabaseError databaseError, boolean b,
+                                       DataSnapshot dataSnapshot) {
+                    // Transaction completed
+                    Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                }
+            });
+      //  }
+
+        return true;
     }
 }
