@@ -4,9 +4,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutosActivity extends AppCompatActivity {
+public class ProdutosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private static final int RC_BARCODE_CAPTURE = 1;
@@ -48,7 +54,20 @@ public class ProdutosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produtos);
+        setContentView(R.layout.activity_main);
+
+        //Navigation
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //mapeia os componentes da View
         lvProdutos = findViewById(R.id.lvProdutos);
@@ -205,5 +224,52 @@ public class ProdutosActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.nav_carrinho:{
+                if(AppSetup.itens.isEmpty()){
+                    Toast.makeText(this, R.string.toast_carrinho_esta_vazio, Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(new Intent(this, CestaActivity.class));
+                }
+                break;
+            }
+            case R.id.nav_clientes:{
+                startActivity(new Intent(this, ClientesActivity.class));
+                break;
+            }
+            case R.id.nav_produto_adminstracao:{
+               // startActivity(new Intent(this, ProdutoAdminActivity.class));
+                break;
+            }
+            case R.id.nav_cliente_administracao:{
+                //startActivity(new Intent(this, ClienteAdminActivity.class));
+                break;
+            }
+            case R.id.nav_sobre:{
+               // startActivity(new Intent(this, SobreActivity.class));
+                break;
+            }
+            case R.id.nav_sair:{
+                if (!AppSetup.itens.isEmpty()) {
+                    alertDialogSimNao(getString(R.string.titulo_alertDialogSimNao), getString(R.string.mensagem_se_voce_sair));
+                } else {
+                    closeDrawer();
+                    finish();
+                }
+                break;
+            }
+        }
+
+        closeDrawer();
+
+        return true;
+    }
+
+    private void closeDrawer() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 }

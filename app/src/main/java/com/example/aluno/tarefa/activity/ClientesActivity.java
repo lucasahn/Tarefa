@@ -34,9 +34,6 @@ public class ClientesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppSetup.cliente != null) {
-            startActivity(new Intent(ClientesActivity.this, DetalheProdutoActivity.class));
-        } else {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_clientes);
             final ListView lvClientes = findViewById(R.id.lvClientes);
@@ -68,11 +65,10 @@ public class ClientesActivity extends AppCompatActivity {
                     Cliente cliente3 = (Cliente) objeto;
                     AppSetup.cliente = new Cliente();
                     AppSetup.cliente = cliente3;
-                    Intent i2 = new Intent(ClientesActivity.this, DetalheProdutoActivity.class);
-                    startActivity(i2);
+                    //Intent i2 = new Intent(ClientesActivity.this, DetalheProdutoActivity.class);
+                    //startActivity(i2);
                     finish();
                 }
             });
-        }
     }
 }
