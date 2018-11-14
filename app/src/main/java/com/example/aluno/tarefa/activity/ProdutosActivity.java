@@ -82,7 +82,7 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
                   Produto produto2 = dataSnap.getValue(Produto.class);
-                  produto2.setCodigoDeBarras(Long.parseLong(dataSnap.getKey()));
+                  //produto2.setCodigoDeBarras(Long.parseLong(dataSnap.getKey()));
                   produtos.add(produto2);
                 }
                 atualizarView();
@@ -238,18 +238,20 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
             }
             case R.id.nav_clientes:{
                 startActivity(new Intent(this, ClientesActivity.class));
+                finish();
                 break;
             }
             case R.id.nav_produto_adminstracao:{
-               // startActivity(new Intent(this, ProdutoAdminActivity.class));
+                startActivity(new Intent(this, ProdutoAdminActivity.class));
+                finish();
                 break;
             }
             case R.id.nav_cliente_administracao:{
-                //startActivity(new Intent(this, ClienteAdminActivity.class));
+                startActivity(new Intent(this, ClienteAdminActivity.class));
                 break;
             }
             case R.id.nav_sobre:{
-               // startActivity(new Intent(this, SobreActivity.class));
+                startActivity(new Intent(this, sobre_activity.class));
                 break;
             }
             case R.id.nav_sair:{

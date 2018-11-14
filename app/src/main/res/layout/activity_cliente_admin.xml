@@ -28,11 +28,11 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:contentDescription="@string/foto_do_produto"
+                android:contentDescription="@string/foto_do_cliente"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/carrinho_de_compras" />
+                app:srcCompat="@drawable/cliente_icon_524x524" />
 
             <TextView
                 android:id="@+id/textView"
@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <EditText
-                android:id="@+id/etCodigoProduto"
+                android:id="@+id/etCodigoCliente"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -67,11 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/label_nome"
-                app:layout_constraintStart_toStartOf="@+id/etCodigoProduto"
-                app:layout_constraintTop_toBottomOf="@+id/etCodigoProduto" />
+                app:layout_constraintStart_toStartOf="@+id/etCodigoCliente"
+                app:layout_constraintTop_toBottomOf="@+id/etCodigoCliente" />
 
             <EditText
-                android:id="@+id/etNomeProdutoAdmin"
+                android:id="@+id/etNomeCliente"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -79,7 +79,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="10"
-                android:hint="@string/hint_nome_produto"
+                android:hint="@string/hint_nome_cliente"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,12 +90,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/label_descricao"
-                app:layout_constraintStart_toStartOf="@+id/etNomeProdutoAdmin"
-                app:layout_constraintTop_toBottomOf="@+id/etNomeProdutoAdmin" />
+                android:text="@string/label_cpf"
+                app:layout_constraintStart_toStartOf="@+id/etNomeCliente"
+                app:layout_constraintTop_toBottomOf="@+id/etNomeCliente" />
 
             <EditText
-                android:id="@+id/etDescricaoProdutoAdmin"
+                android:id="@+id/etCPFCliente"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -103,60 +103,12 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="10"
-                android:hint="@string/hint_descricao_produto"
+                android:hint="@string/hint_cpf"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/label_valor"
-                app:layout_constraintStart_toStartOf="@+id/etDescricaoProdutoAdmin"
-                app:layout_constraintTop_toBottomOf="@+id/etDescricaoProdutoAdmin" />
-
-            <EditText
-                android:id="@+id/etValorProdutoAdmin"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:ems="10"
-                android:hint="@string/hint_valor"
-                android:inputType="numberSigned"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_quantidade"
-                app:layout_constraintStart_toStartOf="@+id/etValorProdutoAdmin"
-                app:layout_constraintTop_toBottomOf="@+id/etValorProdutoAdmin" />
-
-            <EditText
-                android:id="@+id/etQuantidadeProdutoAdmin"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:ems="10"
-                android:hint="@string/hint_quantidade_digite"
-                android:inputType="numberSigned"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <Button
                 android:id="@+id/btInserirProdutoAdmin"
@@ -175,8 +127,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.363"
-                app:layout_constraintStart_toEndOf="@+id/etQuantidadeProdutoAdmin"
-                app:layout_constraintTop_toTopOf="@+id/etValorProdutoAdmin"
+                app:layout_constraintStart_toStartOf="@+id/etCPFCliente"
+                app:layout_constraintTop_toBottomOf="@+id/etCPFCliente"
                 app:layout_constraintVertical_bias="0.0" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>

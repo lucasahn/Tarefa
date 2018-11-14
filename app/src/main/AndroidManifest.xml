@@ -43,7 +43,9 @@
             android:name=".activity.CadastroActivity"
             android:label="@string/title_activity_cadastro" />
         <activity android:name=".activity.CestaActivity" />
-        <activity android:name=".activity.ProdutoAdminActivity"></activity>
+        <activity android:name=".activity.ProdutoAdminActivity" />
+        <activity android:name=".activity.sobre_activity" />
+        <activity android:name=".activity.ClienteAdminActivity"></activity>
     </application>
 
 </manifest>

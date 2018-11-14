@@ -78,7 +78,11 @@ public class CestaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
          switch (item.getItemId()){
              case R.id.menuitem_salvar: {
-                alertDialogSalvarPedido("Quase lá", "\nTotal do Pedido:" + NumberFormat.getCurrencyInstance().format(totalPedido));
+                 if(AppSetup.itens.isEmpty()){
+                     Toast.makeText(this, R.string.toast_carrinho_esta_vazio, Toast.LENGTH_SHORT).show();
+                 }else {
+                     alertDialogSalvarPedido("Quase lá", "\nTotal do Pedido:" + NumberFormat.getCurrencyInstance().format(totalPedido));
+                 }
                  break;
              }
              case R.id.menuitem_cancelar:{

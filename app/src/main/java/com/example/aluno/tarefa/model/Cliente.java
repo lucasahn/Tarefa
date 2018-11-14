@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Cliente implements Serializable {
     private Long codigo;
     private String nome;
-    private Long cpf;
+    private String cpf;
     private String urlFoto;
     private String dataInscricao;
 
     public Cliente() {
     }
 
-    public Cliente(Long codigo, String nome, Long cpf, String urlFoto, String dataInscricao) {
+    public Cliente(Long codigo, String nome, String cpf, String urlFoto, String dataInscricao) {
         this.codigo = codigo;
         this.nome = nome;
         this.cpf = cpf;
@@ -36,11 +36,11 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

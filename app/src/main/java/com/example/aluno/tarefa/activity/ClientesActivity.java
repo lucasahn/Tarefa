@@ -46,7 +46,7 @@ public class ClientesActivity extends AppCompatActivity {
                             for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
                                 Cliente cliente2 = dataSnap.getValue(Cliente.class);
                                 //Toast.makeText(ClientesActivity.this, cliente2.toString(), Toast.LENGTH_SHORT).show();
-                                cliente2.setCodigo(Long.parseLong(dataSnap.getKey()));
+                                //cliente2.setCodigo(Long.parseLong(dataSnap.getKey()));
                                 clientes.add(cliente2);
                             }
                             lvClientes.setAdapter(new ClientesAdapter(ClientesActivity.this, clientes));

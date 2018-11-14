@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    private String dtPedido;
+    private Date dtCriacao;
+    private Date dtModificacao;
     private Cliente cliente;
     private Double total;
     private List<ItemPedido>itens = new ArrayList<ItemPedido>();
 
-    public Pedido(String dtPedido, Cliente cliente, Double total, List<ItemPedido> itens) {
-        this.dtPedido = dtPedido;
+    public Pedido(Date dtPedido, Date dtModificacao, Cliente cliente, Double total, List<ItemPedido> itens) {
+        this.dtCriacao = dtPedido;
+        this.dtModificacao = dtModificacao;
         this.cliente = cliente;
         this.total = total;
         this.itens = itens;
@@ -20,12 +22,20 @@ public class Pedido {
     public Pedido() {
     }
 
-    public String getDtPedido() {
-        return dtPedido;
+    public Date getDtCricao() {
+        return dtCriacao;
     }
 
-    public void setDtPedido(String dtPedido) {
-        this.dtPedido = dtPedido;
+    public void setDtCriacao(Date dtCriacao) {
+        this.dtCriacao = dtCriacao;
+    }
+
+    public Date getDtModificacao() {
+        return dtModificacao;
+    }
+
+    public void setDtModificacao(Date dtModificacao) {
+        this.dtModificacao = dtModificacao;
     }
 
     public Cliente getCliente() {
@@ -55,7 +65,8 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido{" +
-                "dtPedido=" + dtPedido +
+                "dtPedido=" + dtCriacao +
+                "dtModificacao=" + dtModificacao +
                 ", cliente=" + cliente +
                 ", total=" + total +
                 ", itens=" + itens +
