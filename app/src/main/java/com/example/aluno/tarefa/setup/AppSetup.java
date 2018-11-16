@@ -20,6 +20,8 @@ public class AppSetup {
     public static List<ItemPedido> itens = new ArrayList<ItemPedido>();
     public static Cliente cliente = null;
     public static Produto produto = new Produto();
+    public static List<Produto> produtos = new ArrayList<>();
+    public static List<String> keysProdutos = new ArrayList<>();
 
     public static DatabaseReference getDBInstance(){
         //se ainda não tem a referência para o realtimedatabase, a pega

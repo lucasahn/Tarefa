@@ -75,6 +75,8 @@ public class DetalheProdutoActivity extends AppCompatActivity {
                                     ItemPedido item = new ItemPedido(AppSetup.produto, AppSetup.produto.getValor() * AppSetup.produto.getQuantidade());
                                     Intent intent = new Intent(DetalheProdutoActivity.this, CestaActivity.class);
                                     AppSetup.itens.add(item);
+                                    DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(AppSetup.produto.getKey()).child("estoque");
+                                    myRef.setValue(AppSetup.produto.getEstoque() - AppSetup.produto.getQuantidade());
                                     startActivity(intent);
                                     finish();
                                 } else {

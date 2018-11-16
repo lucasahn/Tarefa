@@ -12,6 +12,7 @@ public class Produto implements Serializable {
     }
 
     private Long codigoDeBarras;
+    private String key;
     private String nome;
     private Double valor;
     private String descricao;
@@ -24,6 +25,12 @@ public class Produto implements Serializable {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    public String getKey() {
+        return key;
+    }
+    public void setKey(String key) {
+        this.key = key;
     }
     public Double getValor() {
         return valor;
@@ -61,8 +68,9 @@ public class Produto implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public Produto(Long codigoDeBarras, String nome, Double valor, String descricao, boolean situacao, Integer quantidade, Integer estoque) {
+    public Produto(Long codigoDeBarras, String key,  String nome, Double valor, String descricao, boolean situacao, Integer quantidade, Integer estoque) {
         this.codigoDeBarras = codigoDeBarras;
+        this.key = key;
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
@@ -78,6 +86,7 @@ public class Produto implements Serializable {
     public String toString() {
         return "Produto{" +
                 "id=" + codigoDeBarras +
+                "key=" + key +
                 ", nome='" + nome + '\'' +
                 ", valor=" + valor +
                 ", descricao='" + descricao + '\'' +

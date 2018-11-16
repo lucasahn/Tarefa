@@ -71,4 +71,5 @@
     <string name="hint_cpf">Digite o cpf do cliente</string>
     <string name="toast_otimo_cliente_cadastrado">Cliente cadastrado com sucesso!</string>
     <string name="toast_cliente_nao_cadastrado">Cliente não foi cadastrado!</string>
+    <string name="toast_produto_no_carrinho">Este produto já está no carrinho!</string>
 </resources>

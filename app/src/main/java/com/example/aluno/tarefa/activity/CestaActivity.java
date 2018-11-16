@@ -156,6 +156,8 @@ public class CestaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AppSetup.itens.remove(position); //remove do carrinho
+                DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(AppSetup.produto.getKey()).child("estoque");
+                myRef.setValue(AppSetup.produto.getEstoque());
                 Toast.makeText(CestaActivity.this, "Produto removido.", Toast.LENGTH_SHORT).show();
                 atualizarView();
             }

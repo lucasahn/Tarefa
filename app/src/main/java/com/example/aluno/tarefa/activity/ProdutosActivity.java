@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.adapter.ProdutosAdapter;
 import com.example.aluno.tarefa.barcode.BarcodeCaptureActivity;
+import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.model.Produto;
 import com.example.aluno.tarefa.setup.AppSetup;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -82,7 +83,7 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
                   Produto produto2 = dataSnap.getValue(Produto.class);
-                  //produto2.setCodigoDeBarras(Long.parseLong(dataSnap.getKey()));
+                  produto2.setKey(dataSnap.getKey());
                   produtos.add(produto2);
                 }
                 atualizarView();
@@ -98,15 +99,28 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object objeto = lvProdutos.getItemAtPosition(position);
                 Produto produto3 = (Produto) objeto;
-                AppSetup.produto = produto3;
-                Intent i = new Intent(ProdutosActivity.this, DetalheProdutoActivity.class);
-                startActivity(i);
+                if(isNoCarrinho(produto3)){
+                    Toast.makeText(ProdutosActivity.this, R.string.toast_produto_no_carrinho, Toast.LENGTH_SHORT).show();
+                }else {
+                    AppSetup.produto = produto3;
+                    Intent i = new Intent(ProdutosActivity.this, DetalheProdutoActivity.class);
+                    startActivity(i);
+                }
             }
         });
     }
 
     private void atualizarView() {
         lvProdutos.setAdapter(new ProdutosAdapter(ProdutosActivity.this, produtos));
+    }
+
+    private boolean isNoCarrinho(Produto produto){
+        for(ItemPedido item : AppSetup.itens){
+            if(item.getProduto().getKey().equals(produto.getKey())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
