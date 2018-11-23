@@ -104,10 +104,12 @@ public class CestaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                salvarEstoque();
-               // Toast.makeText(CestaActivity.this, "Ótimo! Vendido.", Toast.LENGTH_SHORT).show();
+                DatabaseReference myRef = AppSetup.getDBInstance();
+                Pedido pedido = new Pedido(Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), AppSetup.cliente, totalPedido,AppSetup.itens);
+                myRef.child("pedidos").push().setValue(pedido);
                 AppSetup.itens.clear();
                 AppSetup.cliente = null;
+                Toast.makeText(CestaActivity.this, "Ótimo! Vendido.", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -131,6 +133,10 @@ public class CestaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(CestaActivity.this, "Que pena! Pedido cancelado.", Toast.LENGTH_SHORT).show();
+                for (ItemPedido item : AppSetup.itens) {
+                    DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(item.getProduto().getKey()).child("estoque");
+                    myRef.setValue(item.getProduto().getEstoque());
+                }
                 AppSetup.itens.clear();
                 AppSetup.cliente = null;
                 finish();
@@ -150,14 +156,14 @@ public class CestaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //add the title and text
         builder.setTitle(titulo);
-        builder.setMessage(mensagem);
+        builder.setMessage(mensagem + position + AppSetup.itens.get(position).getProduto().getKey());
         //add the buttons
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                AppSetup.itens.remove(position); //remove do carrinho
-                DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(AppSetup.produto.getKey()).child("estoque");
-                myRef.setValue(AppSetup.produto.getEstoque());
+                DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(AppSetup.itens.get(position).getProduto().getKey()).child("estoque");
+                myRef.setValue(AppSetup.itens.get(position).getProduto().getEstoque());
+                AppSetup.itens.remove(position);
                 Toast.makeText(CestaActivity.this, "Produto removido.", Toast.LENGTH_SHORT).show();
                 atualizarView();
             }
@@ -181,34 +187,5 @@ public class CestaActivity extends AppCompatActivity {
         }
         tvValor = findViewById(R.id.tvCestaValor);
        tvValor.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
-    }
-
-    private boolean salvarEstoque() {
-        DatabaseReference estoqueRef;
-       // for (final ItemPedido item : AppSetup.itens) {
-            estoqueRef = FirebaseDatabase.getInstance().getReference("produto");
-            estoqueRef.runTransaction(new Transaction.Handler() {
-                public static final String TAG = "CestaActivity";
-
-                @Override
-                public Transaction.Result doTransaction(MutableData mutableData) {
-                    Array produtos = mutableData.getValue(Array.class);
-                   // if (estoque != null && estoque >= item.getProduto().getQuantidade()) {
-                       // mutableData.setValue(estoque - item.getProduto().getQuantidade());
-                    //}
-                    Log.d(TAG, produtos.toString());
-                    return Transaction.success(mutableData);
-                }
-
-                @Override
-                public void onComplete(DatabaseError databaseError, boolean b,
-                                       DataSnapshot dataSnapshot) {
-                    // Transaction completed
-                    Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-                }
-            });
-      //  }
-
-        return true;
     }
 }

@@ -103,11 +103,18 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
                     Toast.makeText(ProdutosActivity.this, R.string.toast_produto_no_carrinho, Toast.LENGTH_SHORT).show();
                 }else {
                     AppSetup.produto = produto3;
+                    AppSetup.produtos.add(produto3);
                     Intent i = new Intent(ProdutosActivity.this, DetalheProdutoActivity.class);
                     startActivity(i);
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizarView();
     }
 
     private void atualizarView() {
@@ -227,6 +234,10 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                for (ItemPedido item : AppSetup.itens) {
+                    DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(item.getProduto().getKey()).child("estoque");
+                    myRef.setValue(item.getProduto().getEstoque());
+                }
                 finish();
             }
         });
