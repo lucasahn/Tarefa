@@ -70,7 +70,7 @@ public class DetalheProdutoActivity extends AppCompatActivity {
                         }
                         else{
                                 EditText etQuantidade = findViewById(R.id.etQuantidadeProduto);
-                                if (!etQuantidade.getText().toString().matches("") && Integer.valueOf(etQuantidade.getText().toString()) <= AppSetup.produto.getEstoque()) {
+                                if (!etQuantidade.getText().toString().matches("") && Integer.valueOf(etQuantidade.getText().toString()) <= AppSetup.produto.getEstoque() && Integer.valueOf(etQuantidade.getText().toString()) > 0) {
                                     AppSetup.produto.setQuantidade(Integer.valueOf(etQuantidade.getText().toString()));
                                     ItemPedido item = new ItemPedido(AppSetup.produto, AppSetup.produto.getValor() * AppSetup.produto.getQuantidade());
                                     Intent intent = new Intent(DetalheProdutoActivity.this, CestaActivity.class);
@@ -80,7 +80,7 @@ public class DetalheProdutoActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(DetalheProdutoActivity.this, "Estoque não possui itens suficientes ou o campo está vazio!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DetalheProdutoActivity.this, "Estoque não possui itens suficientes ou o valor é inválido!", Toast.LENGTH_SHORT).show();
                                 }
                         }
                     }

@@ -156,7 +156,7 @@ public class CestaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //add the title and text
         builder.setTitle(titulo);
-        builder.setMessage(mensagem + position + AppSetup.itens.get(position).getProduto().getKey());
+        builder.setMessage(mensagem);
         //add the buttons
         builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
             @Override

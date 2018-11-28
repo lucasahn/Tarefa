@@ -35,11 +35,9 @@ public class ProdutosAdapter extends ArrayAdapter<Produto> {
         }
         TextView nome = (TextView) convertView.findViewById(R.id.tvNomeProdutoAdapter);
         TextView preco = (TextView) convertView.findViewById(R.id.tvQuantidadeProdutoCestaAdapter);
-        TextView id = (TextView) convertView.findViewById(R.id.txtid);
 
         nome.setText(produto.getNome());
         preco.setText(NumberFormat.getCurrencyInstance().format(produto.getValor()));
-        id.setText(produto.getKey());
 
         return convertView;
     }

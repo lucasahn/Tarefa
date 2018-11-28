@@ -48,7 +48,7 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
     Context context;
     private FirebaseDatabase fbDataBase;
     private DatabaseReference dtRef;
-    final List<Produto> produtos = new ArrayList<>();
+    List<Produto> produtos;
     final Produto produto = new Produto();
     ListView lvProdutos;
 
@@ -81,6 +81,7 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
         .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                produtos = new ArrayList<>();
                 for (DataSnapshot dataSnap: dataSnapshot.getChildren()) {
                   Produto produto2 = dataSnap.getValue(Produto.class);
                   produto2.setKey(dataSnap.getKey());
@@ -112,8 +113,8 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
         atualizarView();
     }
 
