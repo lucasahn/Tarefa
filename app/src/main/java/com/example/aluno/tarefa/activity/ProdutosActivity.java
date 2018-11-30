@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.aluno.tarefa.R;
 import com.example.aluno.tarefa.adapter.ProdutosAdapter;
 import com.example.aluno.tarefa.barcode.BarcodeCaptureActivity;
+import com.example.aluno.tarefa.model.Cliente;
 import com.example.aluno.tarefa.model.ItemPedido;
 import com.example.aluno.tarefa.model.Produto;
 import com.example.aluno.tarefa.setup.AppSetup;
@@ -239,6 +240,8 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
                     DatabaseReference myRef = AppSetup.getDBInstance().child("produto").child(item.getProduto().getKey()).child("estoque");
                     myRef.setValue(item.getProduto().getEstoque());
                 }
+                AppSetup.itens = new ArrayList<ItemPedido>();
+                AppSetup.cliente = new Cliente();
                 finish();
             }
         });
